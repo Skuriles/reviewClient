@@ -1,0 +1,31 @@
+<table>
+  <thead>
+    <tr>
+      <th>Nummer</th>
+      <th>Note</th>
+      <th>Kommentar</th>
+      <th>Name</th>
+      <th>Von wem?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>
+        <mz-select-container>
+          <select mz-select id="material-select">
+            <optgroup label="Group 1">
+              <option class="left circle">1</option>
+              <option class="left circle">1-2</option>
+            </optgroup>
+          </select>
+        </mz-select-container>
+      </td>
+      <td>{{item.comment}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.user}}</td>
+    </tr>
+
+
+  </tbody>
+</table>
