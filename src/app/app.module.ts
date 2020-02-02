@@ -1,15 +1,21 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
-import { RouterModule, Routes } from "@angular/router";
-import { MzInputModule, MzButtonModule, MzSelectModule } from "ngx-materialize";
-
 import { AppComponent } from "./components/app.component";
+import { BrowserModule } from "@angular/platform-browser";
 import { StartComponent } from "./components/start/start.component";
-import { OverviewComponent } from "./overview/overview.component";
 import { HttpService } from "./services/http.service";
 import { MyHttpInterceptor } from "./services/httpInterceptor.service";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatSelectModule
+} from "@angular/material";
+import { Routes, RouterModule } from "@angular/router";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { OverviewComponent } from "./components/overview/overview.component";
+import { FormsModule } from "@angular/forms";
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
@@ -22,13 +28,15 @@ const appRoutes: Routes = [
   declarations: [AppComponent, StartComponent, OverviewComponent],
   imports: [
     RouterModule.forRoot(appRoutes),
-    MzSelectModule,
     BrowserModule,
-    MzInputModule,
-    MzButtonModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [HttpService, MyHttpInterceptor],
   bootstrap: [AppComponent]

@@ -5,15 +5,10 @@
   <img width="80%" alt="bild" src="assets/images/main.jpeg" />
 </div>
 <div class="row">
-  <mz-input-container>
-    <input mz-input [label]="'Name'" [validate]="true" [dataError]="'Name muss ausgefüllt sein'"
-      [dataSuccess]="'Und los geht\'s'" id="name" placeholder="Dein Name" length="150" type="text" [(ngModel)]="name"
-      (keyup.enter)="showStart()" />
-  </mz-input-container>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Name eingeben" [(ngModel)]="name" />
+  </mat-form-field>
 </div>
 <div class="row">
-  <button mz-button [large]="true" class="purple accent-2" (click)="showStart()"
-    [disabled]="!name || name.length === 0">
-    Starten
-  </button>
+  <button mat-fab color="primary" [disabled]="checkName()" (click)="showStart()">Starten</button>
 </div>

@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <tr>
+      <th>Nummer</th>
+      <th>Note</th>
+      <th>Kommentar</th>
+      <th>Name</th>
+      <th>Von wem?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>
+        <mat-form-field>
+          <mat-label>Note</mat-label>
+          <mat-select [(value)]="item.value">
+            <mat-option value=null>None</mat-option>
+            <mat-option value="0">Option 1</mat-option>
+            <mat-option value="1">Option 2</mat-option>
+            <mat-option value="2">Option 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>{{item.comment}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.user}}</td>
+    </tr>
+
+
+  </tbody>
+</table>

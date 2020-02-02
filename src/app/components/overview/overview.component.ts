@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Drink } from "../classes/drink";
-import { HttpService } from "../services/http.service";
-import { MzSelectModule } from "ngx-materialize";
+import { Drink } from "src/app/classes/drink";
+import { HttpService } from "src/app/services/http.service";
 
 @Component({
   selector: "app-overview",
@@ -10,6 +9,7 @@ import { MzSelectModule } from "ngx-materialize";
 })
 export class OverviewComponent implements OnInit {
   public items: Drink[];
+  public value: any;
   constructor(private httpService: HttpService) {}
 
   ngOnInit() {
