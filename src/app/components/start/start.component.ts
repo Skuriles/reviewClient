@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormControl } from "@angular/forms";
+import { HttpService } from "src/app/services/http.service";
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: "app-start",
@@ -9,18 +10,35 @@ import { FormControl } from "@angular/forms";
 })
 export class StartComponent implements OnInit {
   public name = "";
+  public errorMsg = "test";
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private httpService: HttpService,
+    private _snackBar: MatSnackBar
+  ) {}
   public ngOnInit() {}
 
   public showStart() {
     if (!this.name || this.name.length === 0) {
       return;
     }
-    this.router.navigate(["overview"]);
+    this.httpService.addUser(this.name).subscribe((result: boolean) => {
+      if (result) {
+        this.router.navigate(["overview"]);
+      } else {
+        this.showError("Benutzer gibt es schon");
+      }
+    });
   }
 
   public checkName() {
     return !this.name || this.name.length === 0;
+  }
+
+  public showError(msg: string) {
+    this._snackBar.open(msg, "X", {
+      duration: 3000
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Drink } from "src/app/classes/drink";
 import { HttpService } from "src/app/services/http.service";
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: "app-overview",
@@ -9,8 +10,11 @@ import { HttpService } from "src/app/services/http.service";
 })
 export class OverviewComponent implements OnInit {
   public items: Drink[];
-  public value: any;
-  constructor(private httpService: HttpService) {}
+  public isFree = false;
+  constructor(
+    private httpService: HttpService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.items = [];
@@ -19,6 +23,22 @@ export class OverviewComponent implements OnInit {
         const drink = new Drink(item.id, item.name, null);
         this.items.push(drink);
       }
+    });
+  }
+
+  public save(item: Drink) {
+    this.httpService.saveDrink(item).subscribe((result: boolean) => {
+      if (result) {
+        this.showError("Gespeichert");
+      } else {
+        this.showError("Speichern fehlgeschlagen");
+      }
+    });
+  }
+
+  public showError(msg: string) {
+    this._snackBar.open(msg, "X", {
+      duration: 1000
     });
   }
 }

@@ -10,7 +10,8 @@ import {
   MatButtonModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSnackBarModule
 } from "@angular/material";
 import { Routes, RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatInputModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [HttpService, MyHttpInterceptor],
   bootstrap: [AppComponent]

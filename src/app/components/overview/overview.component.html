@@ -4,8 +4,9 @@
       <th>Nummer</th>
       <th>Note</th>
       <th>Kommentar</th>
-      <th>Name</th>
-      <th>Von wem?</th>
+      <th *ngIf="isFree">Name</th>
+      <th *ngIf="isFree">Von wem?</th>
+      <th>Speichern</th>
     </tr>
   </thead>
   <tbody>
@@ -15,16 +16,30 @@
         <mat-form-field>
           <mat-label>Note</mat-label>
           <mat-select [(value)]="item.value">
-            <mat-option value=null>None</mat-option>
-            <mat-option value="0">Option 1</mat-option>
-            <mat-option value="1">Option 2</mat-option>
-            <mat-option value="2">Option 3</mat-option>
+            <mat-option value=null>Noch nicht bewertet</mat-option>
+            <mat-option value="0">1</mat-option>
+            <mat-option value="1">1-2</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">2-3</mat-option>
+            <mat-option value="4">3</mat-option>
+            <mat-option value="5">3-4</mat-option>
+            <mat-option value="6">4</mat-option>
+            <mat-option value="7">4-5</mat-option>
+            <mat-option value="8">5</mat-option>
+            <mat-option value="9">5-6</mat-option>
+            <mat-option value="10">6</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
-      <td>{{item.comment}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.user}}</td>
+      <td>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Kommentar" [(ngModel)]="item.comment" />
+        </mat-form-field>
+      </td>
+      <td *ngIf="isFree">{{item.name}}</td>
+      <td *ngIf="isFree">{{item.user}}</td>
+      <td> <button mat-raised-button color="primary" (click)="save(item)">Speichern</button>
+      </td>
     </tr>
 
 
