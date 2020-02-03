@@ -11,16 +11,22 @@ import {
   MatInputModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule
 } from "@angular/material";
 import { Routes, RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { OverviewComponent } from "./components/overview/overview.component";
 import { FormsModule } from "@angular/forms";
+import { AtuhGuardService } from "./services/atuh-guard.service";
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
-  { path: "overview", component: OverviewComponent },
+  {
+    path: "overview",
+    component: OverviewComponent,
+    canActivate: [AtuhGuardService]
+  },
   { path: "", redirectTo: "/start", pathMatch: "full" },
   { path: "**", component: StartComponent }
 ];
@@ -38,7 +44,8 @@ const appRoutes: Routes = [
     MatInputModule,
     HttpClientModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [HttpService, MyHttpInterceptor],
   bootstrap: [AppComponent]

@@ -1,23 +1,37 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Drink } from "../classes/drink";
+import { User } from "../classes/user";
 
 @Injectable({
   providedIn: "root"
 })
 export class HttpService {
+  public token: string;
   constructor(private http: HttpClient) {}
+
+  public login(user: User) {
+    const nodeUrl = "api/login";
+    const body = { user: user };
+    return this.postRequest(nodeUrl, body);
+  }
+
+  public checkToken() {
+    const nodeUrl = "api/checkToken";
+    const body = { token: this.token };
+    return this.postRequest(nodeUrl, body);
+  }
 
   public getItems() {
     const nodeUrl = "api/getItems";
     const body = "";
-    return this.postRequest(nodeUrl, body);
+    return this.postAuthRequest(nodeUrl, body);
   }
 
-  public addUser(name: string) {
+  public addUser(user: User) {
     const nodeUrl = "api/addUser";
-    const body = { name };
-    return this.postRequest(nodeUrl, body);
+    const body = { user: user };
+    return this.postAuthRequest(nodeUrl, body);
   }
 
   public saveDrink(item: Drink) {
@@ -35,6 +49,8 @@ export class HttpService {
   }
 
   private postAuthRequest(nodeUrl: string, body: any) {
-    return this.http.post(nodeUrl, body);
+    return this.http.post(nodeUrl, body, {
+      headers: new HttpHeaders().set("Authorization", this.token)
+    });
   }
 }

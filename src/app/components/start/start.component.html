@@ -10,5 +10,10 @@
   </mat-form-field>
 </div>
 <div class="row">
+  <mat-form-field>
+    <input matInput type="password" placeholder="Pw eingeben" [(ngModel)]="pw" />
+  </mat-form-field>
+</div>
+<div class="row">
   <button mat-fab color="primary" [disabled]="checkName()" (click)="showStart()">Starten</button>
 </div>
