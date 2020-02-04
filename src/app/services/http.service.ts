@@ -8,6 +8,7 @@ import { User } from "../classes/user";
 })
 export class HttpService {
   public token: string;
+  public isHost = false;
   constructor(private http: HttpClient) {}
 
   public login(user: User) {
@@ -22,6 +23,10 @@ export class HttpService {
     return this.postRequest(nodeUrl, body);
   }
 
+  public checkHost() {
+    const nodeUrl = "api/checkHost";
+    return this.postAuthRequest(nodeUrl, "");
+  }
   public getItems() {
     const nodeUrl = "api/getItems";
     const body = "";

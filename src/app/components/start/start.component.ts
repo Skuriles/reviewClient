@@ -28,8 +28,12 @@ export class StartComponent implements OnInit {
       this.httpService.token = localStorage.getItem("ichbineinteamToken");
       this.httpService.checkToken().subscribe((result: boolean) => {
         if (result) {
+          this.httpService.checkHost().subscribe((isHost: boolean) => {
+            this.httpService.isHost = isHost;
+          });
           this.router.navigate(["overview"]);
         } else {
+          localStorage.setItem("ichbineinteamToken", null);
           this.httpService.token = null;
         }
       });
@@ -53,7 +57,12 @@ export class StartComponent implements OnInit {
         this.httpService.token = result.token;
         localStorage.setItem("ichbineinteamToken", result.token);
         this.router.navigate(["overview"]);
+        this.httpService.checkHost().subscribe((isHost: boolean) => {
+          this.httpService.isHost = isHost;
+        });
       } else {
+        localStorage.setItem("ichbineinteamToken", null);
+        this.httpService.token = null;
         this.showError("Benutzer gibt es schon");
       }
     });

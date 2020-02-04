@@ -1,14 +1,20 @@
 import { Injectable } from "@angular/core";
-import { Router, CanActivate } from "@angular/router";
+import { Router, CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 import { HttpService } from "./http.service";
 
 @Injectable({
   providedIn: "root"
 })
-export class AtuhGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate {
   constructor(private httpService: HttpService, private router: Router) {}
 
-  public canActivate() {
+  public canActivate(route: ActivatedRouteSnapshot) {
+    if (route.url[0].path === "host") {
+      if (!this.httpService.isHost) {
+        this.router.navigate(["start"]);
+      }
+      return true;
+    }
     if (this.httpService.token && this.httpService.token.length > 0) {
       return true;
     }
