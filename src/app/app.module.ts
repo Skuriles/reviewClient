@@ -20,6 +20,7 @@ import { OverviewComponent } from "./components/overview/overview.component";
 import { FormsModule } from "@angular/forms";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { HostViewComponent } from "./components/host-view/host-view.component";
+import { AdminviewComponent } from "./components/adminview/adminview.component";
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
@@ -33,6 +34,11 @@ const appRoutes: Routes = [
     component: HostViewComponent,
     canActivate: [AuthGuardService]
   },
+  {
+    path: "admin",
+    component: AdminviewComponent,
+    canActivate: [AuthGuardService]
+  },
   { path: "", redirectTo: "/start", pathMatch: "full" },
   { path: "**", component: StartComponent }
 ];
@@ -42,7 +48,8 @@ const appRoutes: Routes = [
     AppComponent,
     StartComponent,
     OverviewComponent,
-    HostViewComponent
+    HostViewComponent,
+    AdminviewComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

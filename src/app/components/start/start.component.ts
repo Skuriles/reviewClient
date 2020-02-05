@@ -14,6 +14,7 @@ export class StartComponent implements OnInit {
   public name = "";
   public pw = "";
   public errorMsg = "test";
+  private tokenName = this.httpService.tokenName;
 
   constructor(
     private router: Router,
@@ -22,18 +23,18 @@ export class StartComponent implements OnInit {
   ) {}
   public ngOnInit() {
     if (
-      localStorage.getItem("ichbineinteamToken") !== null &&
-      localStorage.getItem("ichbineinteamToken") !== ""
+      localStorage.getItem(this.tokenName) !== null &&
+      localStorage.getItem(this.tokenName) !== ""
     ) {
-      this.httpService.token = localStorage.getItem("ichbineinteamToken");
+      this.httpService.token = localStorage.getItem(this.tokenName);
       this.httpService.checkToken().subscribe((result: boolean) => {
         if (result) {
-          this.httpService.checkHost().subscribe((isHost: boolean) => {
-            this.httpService.isHost = isHost;
+          this.httpService.checkRole().subscribe((roleResult: { role }) => {
+            this.httpService.role = roleResult.role;
+            this.router.navigate(["overview"]);
           });
-          this.router.navigate(["overview"]);
         } else {
-          localStorage.setItem("ichbineinteamToken", null);
+          localStorage.setItem(this.tokenName, null);
           this.httpService.token = null;
         }
       });
@@ -55,13 +56,13 @@ export class StartComponent implements OnInit {
     this.httpService.login(user).subscribe((result: TokenResult) => {
       if (result) {
         this.httpService.token = result.token;
-        localStorage.setItem("ichbineinteamToken", result.token);
-        this.router.navigate(["overview"]);
-        this.httpService.checkHost().subscribe((isHost: boolean) => {
-          this.httpService.isHost = isHost;
+        localStorage.setItem(this.tokenName, result.token);
+        this.httpService.checkRole().subscribe((roleResult: { role }) => {
+          this.httpService.role = roleResult.role;
+          this.router.navigate(["overview"]);
         });
       } else {
-        localStorage.setItem("ichbineinteamToken", null);
+        localStorage.setItem(this.tokenName, null);
         this.httpService.token = null;
         this.showError("Benutzer gibt es schon");
       }
