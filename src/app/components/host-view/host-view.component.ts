@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Drink } from "src/app/classes/drink";
 import { HttpService } from "src/app/services/http.service";
 import { MatTable } from "@angular/material";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { BottomSheetComponent } from "../bottom-sheet/bottom-sheet.component";
 
 @Component({
   selector: "app-host-view",
@@ -13,10 +15,14 @@ export class HostViewComponent implements OnInit {
   public newDrink: Drink;
   public showNewDrink = false;
   public displayedColumns = ["id", "name", "user", "save", "delete"];
+  public errorList: string[] = [];
 
   @ViewChild(MatTable) table: MatTable<Drink>;
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private _bottomSheet: MatBottomSheet
+  ) {}
 
   ngOnInit(): void {
     this.items = [];
@@ -24,6 +30,7 @@ export class HostViewComponent implements OnInit {
     this.getDrinks();
   }
   private getDrinks() {
+    this.items = [];
     this.httpService.getHostItems().subscribe((items: Drink[]) => {
       for (const item of items) {
         const drink = new Drink(item.id, item.name, null);
@@ -58,5 +65,22 @@ export class HostViewComponent implements OnInit {
         this.table.renderRows();
       }
     });
+  }
+
+  public finish() {
+    this.httpService.finish().subscribe(
+      (result: boolean) => {
+        if (result) {
+        }
+      },
+      err => {
+        this.errorList = err.error.error;
+        this.openBottomSheet();
+      }
+    );
+  }
+
+  public openBottomSheet(): void {
+    this._bottomSheet.open(BottomSheetComponent, { data: this.errorList });
   }
 }

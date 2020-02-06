@@ -70,4 +70,12 @@ export class OverviewComponent implements OnInit {
       duration: 1000
     });
   }
+
+  public checkFree() {
+    this.httpService.checkResult().subscribe((result: boolean) => {
+      if (result) {
+        this.router.navigate(["result"]);
+      }
+    });
+  }
 }

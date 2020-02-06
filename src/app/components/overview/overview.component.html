@@ -2,6 +2,7 @@
   <button mat-raised-button color="default" (click)="logout()">Ausloggen</button>
   <button mat-raised-button color="primary" routerLink="/admin" *ngIf="isAdmin">Admin</button>
   <button mat-raised-button color="accent" routerLink="/host" *ngIf="isHost">Gastgeber</button>
+  <button mat-raised-button color="accent" (click)="checkFree()">Ergebnis</button>
 </div>
 <table mat-table [dataSource]="items" class="mat-elevation-z8">
 

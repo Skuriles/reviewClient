@@ -1,1 +1,35 @@
-<p>adminview works!</p>
+<div class="row btn-menu">
+  <button mat-raised-button color="default" (click)="logout()">Ausloggen</button>
+</div>
+<table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Nr </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pw">
+    <th mat-header-cell *matHeaderCellDef> Password </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-form-field [style.width.%]="90">
+        <input matInput type="text" placeholder="Passwort" [(ngModel)]="element.pw" />
+      </mat-form-field>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="save">
+    <th mat-header-cell *matHeaderCellDef> Host </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="setHost(element.id)"
+        *ngIf="element.role !== 'host' && element.role !== 'admin'">Als Host
+        setzen</button>
+      <span *ngIf="element.role == 'host'">Ist Host</span></td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef=" displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

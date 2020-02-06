@@ -4,6 +4,7 @@ import { HttpService } from "src/app/services/http.service";
 import { MatSnackBar } from "@angular/material";
 import { TokenResult } from "src/app/classes/tokenResult";
 import { User } from "src/app/classes/user";
+import { MyConstants } from "src/app/classes/constants";
 
 @Component({
   selector: "app-start",
@@ -31,7 +32,11 @@ export class StartComponent implements OnInit {
         if (result) {
           this.httpService.checkRole().subscribe((roleResult: { role }) => {
             this.httpService.role = roleResult.role;
-            this.router.navigate(["overview"]);
+            if (this.httpService.role === MyConstants.roles.admin) {
+              this.router.navigate(["admin"]);
+            } else {
+              this.router.navigate(["overview"]);
+            }
           });
         } else {
           localStorage.setItem(this.tokenName, null);
@@ -59,7 +64,11 @@ export class StartComponent implements OnInit {
         localStorage.setItem(this.tokenName, result.token);
         this.httpService.checkRole().subscribe((roleResult: { role }) => {
           this.httpService.role = roleResult.role;
-          this.router.navigate(["overview"]);
+          if (this.httpService.role === MyConstants.roles.admin) {
+            this.router.navigate(["admin"]);
+          } else {
+            this.router.navigate(["overview"]);
+          }
         });
       } else {
         localStorage.setItem(this.tokenName, null);

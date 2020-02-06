@@ -47,6 +47,18 @@ export class HttpService {
     return this.postAuthRequest(nodeUrl, body);
   }
 
+  public setAsHost(id: number) {
+    const nodeUrl = "api/setUserAsHost";
+    const body = { id };
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public getUsers() {
+    const nodeUrl = "api/getUserList";
+    const body = "";
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
   public createDrink(newDrink: Drink) {
     const nodeUrl = "api/createDrink";
     const body = newDrink;
@@ -55,7 +67,7 @@ export class HttpService {
 
   public deleteDrink(drinkId: number) {
     const nodeUrl = "api/deleteDrink";
-    const body = drinkId;
+    const body = { drinkId };
     return this.postAuthRequest(nodeUrl, body);
   }
 
@@ -68,6 +80,18 @@ export class HttpService {
   public saveDrink(item: Drink) {
     const nodeUrl = "api/saveDrink";
     const body = { item };
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public finish() {
+    const nodeUrl = "api/finish";
+    const body = "";
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public checkResult() {
+    const nodeUrl = "api/checkResult";
+    const body = "";
     return this.postAuthRequest(nodeUrl, body);
   }
   // default http requests

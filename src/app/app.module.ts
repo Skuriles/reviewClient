@@ -12,8 +12,13 @@ import {
   MatFormFieldModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatBottomSheetModule,
+  MatListModule,
+  MatBottomSheet,
+  MAT_BOTTOM_SHEET_DATA
 } from "@angular/material";
+import { MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { Routes, RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { OverviewComponent } from "./components/overview/overview.component";
@@ -21,6 +26,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { HostViewComponent } from "./components/host-view/host-view.component";
 import { AdminviewComponent } from "./components/adminview/adminview.component";
+import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
@@ -49,7 +55,8 @@ const appRoutes: Routes = [
     StartComponent,
     OverviewComponent,
     HostViewComponent,
-    AdminviewComponent
+    AdminviewComponent,
+    BottomSheetComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -63,9 +70,18 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    MatBottomSheetModule,
+    MatListModule
   ],
-  providers: [HttpService, MyHttpInterceptor],
+  providers: [
+    HttpService,
+    MyHttpInterceptor,
+    MatBottomSheet,
+    ,
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+    { provide: MatBottomSheetRef, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
