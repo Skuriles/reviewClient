@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Drink } from "src/app/classes/drink";
 import { HttpService } from "src/app/services/http.service";
-import { MatTable } from "@angular/material";
+import { MatTable, MatSnackBar } from "@angular/material";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { BottomSheetComponent } from "../bottom-sheet/bottom-sheet.component";
 
@@ -21,7 +21,8 @@ export class HostViewComponent implements OnInit {
 
   constructor(
     private httpService: HttpService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +72,13 @@ export class HostViewComponent implements OnInit {
     this.httpService.finish().subscribe(
       (result: boolean) => {
         if (result) {
+          this._snackBar.open(
+            "Ergebnis ist gespeichert und frei gegeben",
+            "X",
+            {
+              duration: 3000
+            }
+          );
         }
       },
       err => {

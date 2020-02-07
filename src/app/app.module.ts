@@ -5,6 +5,7 @@ import { HttpService } from "./services/http.service";
 import { MyHttpInterceptor } from "./services/httpInterceptor.service";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 import {
   MatButtonModule,
@@ -27,6 +28,7 @@ import { AuthGuardService } from "./services/auth-guard.service";
 import { HostViewComponent } from "./components/host-view/host-view.component";
 import { AdminviewComponent } from "./components/adminview/adminview.component";
 import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
+import { ResultComponent } from "./components/result/result.component";
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
@@ -45,6 +47,11 @@ const appRoutes: Routes = [
     component: AdminviewComponent,
     canActivate: [AuthGuardService]
   },
+  {
+    path: "result",
+    component: ResultComponent,
+    canActivate: [AuthGuardService]
+  },
   { path: "", redirectTo: "/start", pathMatch: "full" },
   { path: "**", component: StartComponent }
 ];
@@ -56,7 +63,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     HostViewComponent,
     AdminviewComponent,
-    BottomSheetComponent
+    BottomSheetComponent,
+    ResultComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -72,7 +80,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatTableModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    NgxChartsModule
   ],
   providers: [
     HttpService,

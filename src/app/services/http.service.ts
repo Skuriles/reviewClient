@@ -94,6 +94,12 @@ export class HttpService {
     const body = "";
     return this.postAuthRequest(nodeUrl, body);
   }
+
+  public getResult() {
+    const nodeUrl = "api/getResult";
+    const body = "";
+    return this.postAuthRequest(nodeUrl, body);
+  }
   // default http requests
   private postRequest(nodeUrl: string, body: any) {
     return this.http.post(nodeUrl, body);
