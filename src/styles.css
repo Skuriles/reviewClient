@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+.mat-input-wrapper {
+  max-width: 100px !important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn-menu {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-menu button {
+  margin-right: 15px;
+}
+
+table {
+  width: 100%;
+}
+
+table tr td {
+  padding: 15px;
+}
+
+table tr th {
+  text-align: center;
+}

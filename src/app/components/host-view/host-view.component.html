@@ -1,19 +1,24 @@
 <div class="row btn-menu">
-  <button mat-raised-button color="basic" routerLink="/overview">Zurück zur Übersicht</button>
+  <button mat-raised-button color="basic" routerLink="/overview">Zurück</button>
   <button mat-raised-button color="primary" (click)="showNewDrink = true">Neues Getränk</button>
-  <button mat-raised-button color="accent" (click)="finish()">Ende!!</button>
+  <button mat-raised-button color="accent" (click)="openDialog()">Ende!!</button>
 </div>
 
-<div class="row" *ngIf="showNewDrink">
-  <mat-form-field>
-    <input matInput type="text" placeholder="Name" [(ngModel)]="newDrink.name" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput type="text" placeholder="Von wem?" [(ngModel)]="newDrink.user" />
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="saveNewDrink()">Speichern</button>
+<div *ngIf="showNewDrink">
+  <div class="row">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" [(ngModel)]="newDrink.name" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Von wem?" [(ngModel)]="newDrink.user" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <button mat-raised-button color="primary" style="margin-bottom: 15px;" (click)="saveNewDrink()">Speichern</button>
+  </div>
 </div>
-
 <table mat-table [dataSource]="items" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Nr </th>

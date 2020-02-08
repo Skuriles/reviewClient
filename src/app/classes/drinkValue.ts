@@ -3,6 +3,11 @@ export class DrinkValue {
   value: number;
 }
 
+export class DrinkColor {
+  name: string;
+  value: string;
+}
+
 export class DrinkResult {
   id: number;
   user: string;

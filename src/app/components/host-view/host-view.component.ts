@@ -4,6 +4,12 @@ import { HttpService } from "src/app/services/http.service";
 import { MatTable, MatSnackBar } from "@angular/material";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { BottomSheetComponent } from "../bottom-sheet/bottom-sheet.component";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
+import { DialogBaseComponent } from "../dialog-base/dialog-base.component";
 
 @Component({
   selector: "app-host-view",
@@ -22,7 +28,8 @@ export class HostViewComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private _bottomSheet: MatBottomSheet,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +93,23 @@ export class HostViewComponent implements OnInit {
         this.openBottomSheet();
       }
     );
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(DialogBaseComponent, {
+      width: "350px",
+      data: {
+        title: "Probe beenden?",
+        msg:
+          "Danach kann keiner mehr eine Note abgeben und das Ergebnis ist für alle sichtbar! Sicher?"
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.finish();
+      }
+    });
   }
 
   public openBottomSheet(): void {

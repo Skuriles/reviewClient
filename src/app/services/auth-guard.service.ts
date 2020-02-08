@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate {
       }
       return true;
     }
-    if (route.url[0].path === "admin") {
+    if (route.url[0].path === "admin" || route.url[0].path === "archive") {
       if (this.httpService.role !== MyConstants.roles.admin) {
         this.router.navigate(["start"]);
       }

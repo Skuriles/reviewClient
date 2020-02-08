@@ -1,15 +1,7 @@
-.btn-menu {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.btn-menu button {
-  margin-left: 15px;
-}
-
 .chart-wrapper {
   display: flex;
   overflow: hidden;
+  min-height: 600px;
 }
 
 .y {

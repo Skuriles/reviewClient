@@ -17,7 +17,8 @@ import {
   MatBottomSheetModule,
   MatListModule,
   MatBottomSheet,
-  MAT_BOTTOM_SHEET_DATA
+  MAT_BOTTOM_SHEET_DATA,
+  MatDialogModule
 } from "@angular/material";
 import { MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { Routes, RouterModule } from "@angular/router";
@@ -29,6 +30,8 @@ import { HostViewComponent } from "./components/host-view/host-view.component";
 import { AdminviewComponent } from "./components/adminview/adminview.component";
 import { BottomSheetComponent } from "./components/bottom-sheet/bottom-sheet.component";
 import { ResultComponent } from "./components/result/result.component";
+import { ArchiveComponent } from "./components/archive/archive.component";
+import { DialogBaseComponent } from './components/dialog-base/dialog-base.component';
 
 const appRoutes: Routes = [
   { path: "start", component: StartComponent },
@@ -52,6 +55,11 @@ const appRoutes: Routes = [
     component: ResultComponent,
     canActivate: [AuthGuardService]
   },
+  {
+    path: "archive",
+    component: ArchiveComponent,
+    canActivate: [AuthGuardService]
+  },
   { path: "", redirectTo: "/start", pathMatch: "full" },
   { path: "**", component: StartComponent }
 ];
@@ -64,7 +72,9 @@ const appRoutes: Routes = [
     HostViewComponent,
     AdminviewComponent,
     BottomSheetComponent,
-    ResultComponent
+    ResultComponent,
+    ArchiveComponent,
+    DialogBaseComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -81,7 +91,8 @@ const appRoutes: Routes = [
     MatTableModule,
     MatBottomSheetModule,
     MatListModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatDialogModule
   ],
   providers: [
     HttpService,

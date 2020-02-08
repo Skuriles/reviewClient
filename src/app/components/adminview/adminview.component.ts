@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpService } from "src/app/services/http.service";
 import { User } from "src/app/classes/user";
 import { Router } from "@angular/router";
-import { MatTable } from "@angular/material";
+import { MatTable, MatSnackBar } from "@angular/material";
 
 @Component({
   selector: "app-adminview",
@@ -15,7 +15,11 @@ export class AdminviewComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<User>;
 
-  constructor(private httpService: HttpService, private router: Router) {}
+  constructor(
+    private httpService: HttpService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -46,6 +50,23 @@ export class AdminviewComponent implements OnInit {
       if (result) {
         this.getUsers();
       }
+    });
+  }
+
+  public resetAll(id: number) {
+    this.httpService.resetAll().subscribe(result => {
+      if (!result) {
+        this.showError("Reset fehlgeschlagen");
+      } else {
+        this.showError("Reset erfolgreich");
+        this.getUsers();
+      }
+    });
+  }
+
+  public showError(msg: string) {
+    this._snackBar.open(msg, "X", {
+      duration: 1000
     });
   }
 }

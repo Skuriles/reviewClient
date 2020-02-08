@@ -1,5 +1,7 @@
 <div class="row btn-menu">
   <button mat-raised-button color="default" (click)="logout()">Ausloggen</button>
+  <button mat-raised-button color="accent" (click)="resetAll()">Reset</button>
+  <button mat-raised-button color="primary" routerLink="/archive">Archiv</button>
 </div>
 <table mat-table [dataSource]="users" class="mat-elevation-z8">
 

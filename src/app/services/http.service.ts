@@ -100,6 +100,30 @@ export class HttpService {
     const body = "";
     return this.postAuthRequest(nodeUrl, body);
   }
+
+  public resetAll() {
+    const nodeUrl = "api/resetAll";
+    const body = "";
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public getArchive() {
+    const nodeUrl = "api/getArchive";
+    const body = "";
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public getFile(fileName: string) {
+    const nodeUrl = "api/getFile";
+    const body = { fileName };
+    return this.postAuthRequest(nodeUrl, body);
+  }
+
+  public getFileResult(fileName: string) {
+    const nodeUrl = "api/getFileResult";
+    const body = { fileName };
+    return this.postAuthRequest(nodeUrl, body);
+  }
   // default http requests
   private postRequest(nodeUrl: string, body: any) {
     return this.http.post(nodeUrl, body);

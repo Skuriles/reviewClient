@@ -1,11 +1,12 @@
-<div class="row btn-menu">
+<div class="row btn-menu" *ngIf="noArchive">
   <button mat-raised-button color="default" (click)="logout()">Ausloggen</button>
   <button mat-raised-button color="primary" routerLink="/overview">Zurück</button>
 </div>
 <div class="chart-wrapper">
-  <ngx-charts-bar-horizontal [trimYAxisTicks]="false" [scheme]="colorScheme" [results]="data" [gradient]="gradient"
-    [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+  <ngx-charts-bar-horizontal [trimYAxisTicks]="false" [scheme]="colorScheme" [customColors]="customColors"
+    [results]="data" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel">
     <!-- (select)="onSelect($event)"
   (activate)="onActivate($event)"
   (deactivate)="onDeactivate($event)" -->
